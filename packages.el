@@ -80,5 +80,6 @@
 (package! racket-mode)
 (package! org-bullets)
 (package! org-modern)
+(package! gruvbox-theme)
 ;; (package! minimap)
 ;; (package! sublimity)

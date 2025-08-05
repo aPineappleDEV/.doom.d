@@ -42,7 +42,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/NOTES/")
+;; (setq org-directory "/media/pineapple/6F3BD10716AFAD5C/NOTES/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
@@ -77,13 +77,19 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 ;; ============================
+;;           TESTING
+;; ============================
+
+
+;; ============================
 ;;   DASHBOARD CUSTOMIZATION
 ;; ============================
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-loaded)
-(add-hook! '+doom-dashboard-mode-hook #'hide-mode-line-mode)
-(setq! +doom-dashboard--width 200)
+(add-hook! '+doom-dashboard-functions (hide-mode-line-mode 1))
+(add-hook! '+doom-dashboard-functions #'yascroll-bar-mode)
+(setq! +doom-dashboard--width -250)
 
 (defun my-ascii-art ()
   (let* ((banner '(
@@ -152,8 +158,8 @@
 ;; ============================
 (setq server-stop-automatically nil)
 (setq dap-python-debugger 'debugpy)
-(setq projectile-project-search-path '("/home/pineapple/CODE/"))
-(setq deft-directory '"/home/pineapple/NOTES/")
+(setq projectile-project-search-path '("/media/pineapple/6F3BD10716AFAD5C//CODE/"))
+(setq deft-directory '"/media/pineapple/6F3BD10716AFAD5C/NOTES/")
 (setq deft-extensions '("org"))
 (setq deft-recursive 't)
 (beacon-mode 1)
@@ -214,11 +220,56 @@
                   "\\|^#\\+[[:alpha:]_]+:.*$" ;; org-mode metadata
                   "\\|^:PROPERTIES:\n\\(.+\n\\)+:END:\n"
                   "\\)"))
+(with-eval-after-load 'evil
+  (scroll-on-jump-advice-add evil-undo)
+  (scroll-on-jump-advice-add evil-redo)
+  (scroll-on-jump-advice-add evil-jump-item)
+  (scroll-on-jump-advice-add evil-jump-forward)
+  (scroll-on-jump-advice-add evil-jump-backward)
+  (scroll-on-jump-advice-add evil-ex-search-next)
+  (scroll-on-jump-advice-add evil-ex-search-previous)
+  (scroll-on-jump-advice-add evil-forward-paragraph)
+  (scroll-on-jump-advice-add evil-backward-paragraph)
+  (scroll-on-jump-advice-add evil-goto-mark)
 
+  ;; Actions that themselves scroll.
+  (scroll-on-jump-with-scroll-advice-add evil-goto-line)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom))
+
+(with-eval-after-load 'goto-chg
+  (scroll-on-jump-advice-add goto-last-change)
+  (scroll-on-jump-advice-add goto-last-change-reverse))
+
+(global-set-key (kbd "<C-M-next>") (scroll-on-jump-interactive 'diff-hl-next-hunk))
+(global-set-key (kbd "<C-M-prior>") (scroll-on-jump-interactive 'diff-hl-previous-hunk))
+(setq! scroll-on-jump-duration 0.6)
+
+(define-key evil-normal-state-map [down-mouse-2]
+  (lambda ()
+    (interactive)
+    (unless (scroll-on-drag)
+      (mouse-yank-primary t))))
+
+
+(global-set-key
+  [down-mouse-2]
+  (lambda ()
+    (interactive)
+    (unless (scroll-on-drag)
+      (mouse-yank-primary t))))
+;; (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(require 'highlight-parentheses)
+(add-hook 'prog-mode-hook #'highlight-parentheses-mode)
+(add-hook 'minibuffer-setup-hook #'highlight-parentheses-minibuffer-setup)
 ;; ============================
 ;;          ORG STUFF
 ;; ============================
 
+(setq org-directory "/media/pineapple/6F3BD10716AFAD5C/NOTES/")
 (with-eval-after-load 'org (global-org-modern-mode))
 
 (require 'org-bullets)
@@ -227,7 +278,7 @@
 (require 'org-download)
 (add-hook 'dired-mode-hook 'org-download-enable)
 
-(setq org-roam-directory "/home/pineapple/NOTES/")
+(setq org-roam-directory "/media/pineapple/6F3BD10716AFAD5C/NOTES/")
 (use-package! org-roam-ui
     :after org-roam ;; or :after org
 ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have

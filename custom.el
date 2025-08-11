@@ -4,12 +4,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(avy-all-windows 'all-frames)
- '(beacon-blink-when-window-scrolls t)
- '(beacon-mode t)
- '(blink-cursor-mode t)
- '(dap-python-executable "python")
- '(dap-python-terminal "xterm -e")
+ '(custom-safe-themes
+   '("f1e8339b04aef8f145dd4782d03499d9d716fdc0361319411ac2efc603249326"
+     "871b064b53235facde040f6bdfa28d03d9f4b966d8ce28fb1725313731a2bcc8"
+     "f87c86fa3d38be32dc557ba3d4cedaaea7bc3d97ce816c0e518dfe9633250e34"
+     "e8bd9bbf6506afca133125b0be48b1f033b1c8647c628652ab7a2fe065c10ef0"
+     "3538194fff1b928df280dc08f041518a8d51ac3ff704c5e46d1517f5c4d8a0e0" default))
  '(dape-configs
    '((attach modes nil ensure
       (lambda (config)
@@ -80,8 +80,8 @@
                (process-file-shell-command
                 (format "%s -c \"import debugpy.adapter\"" python)))
             (user-error "%s module debugpy is not installed" python))))
-      command "python3" host "localhost" port 9229 :type "python" :request
-      "launch" command (progn (require 'python) python-interpreter) command-args
+      :type "python" :request "launch" command
+      (progn (require 'python) python-interpreter) command-args
       ("-m" "debugpy.adapter" "--host" "0.0.0.0" "--port" :autoport) port
       :autoport :cwd dape-cwd :program dape-buffer-default :args [] :justMyCode
       nil :console "integratedTerminal" :showReturnValue t :stopOnEntry nil)
@@ -93,7 +93,7 @@
                (process-file-shell-command
                 (format "%s -c \"import debugpy.adapter\"" python)))
             (user-error "%s module debugpy is not installed" python))))
-      host "localhost" port 9229 :type "python" :request "launch" command
+      :type "python" :request "launch" command
       (progn (require 'python) python-interpreter) command-args
       ("-m" "debugpy.adapter" "--host" "0.0.0.0" "--port" :autoport) port
       :autoport :cwd dape-cwd :module
@@ -130,28 +130,24 @@
         [dape-ensure-command dape-config-get :runtimeExecutable
                              dape--ensure-executable plist-get command-args
                              file-exists-p user-error "File %S does not exist"]
-        5
-        ("/home/pineapple/.emacs.d/.local/straight/build-30.1/dape/dape.elc"
-         . 2690)]
+        5 "\12\12(fn CONFIG)"]
       command "node" :type "pwa-node" command-args
-      ("/home/pineapple/.doom.d/debug-adapters/js-debug/src/dapDebugServer.js"
+      ("/home/pineapple/.emacs.d/debug-adapters/js-debug/src/dapDebugServer.js"
        :autoport)
       port :autoport :cwd dape-cwd :program dape-buffer-default :console
-      "internalConsole")
+      "externalTerminal")
      (js-debug-ts-node modes (typescript-mode typescript-ts-mode) ensure
       #[257
         "\300\1!\210\301\1\302\"\211\203\20\0\303\1!\210\210\304\1\305\"@\306\1!?\205!\0\307\310\2\"\207"
         [dape-ensure-command dape-config-get :runtimeExecutable
                              dape--ensure-executable plist-get command-args
                              file-exists-p user-error "File %S does not exist"]
-        5
-        ("/home/pineapple/.emacs.d/.local/straight/build-30.1/dape/dape.elc"
-         . 2690)]
+        5 "\12\12(fn CONFIG)"]
       command "node" :type "pwa-node" command-args
-      ("/home/pineapple/.doom.d/debug-adapters/js-debug/src/dapDebugServer.js"
+      ("/home/pineapple/.emacs.d/debug-adapters/js-debug/src/dapDebugServer.js"
        :autoport)
-      port :autoport :runtimeExecutable "ts-node" :cwd dape-cwd :program
-      dape-buffer-default :console "internalConsole")
+      port :autoport :runtimeExecutable "tsx" :cwd dape-cwd :program
+      dape-buffer-default :console "externalTerminal")
      (js-debug-node-attach modes
       (js-mode js-ts-mode typescript-mode typescript-ts-mode) ensure
       #[257
@@ -159,9 +155,7 @@
         [dape-ensure-command dape-config-get :runtimeExecutable
                              dape--ensure-executable plist-get command-args
                              file-exists-p user-error "File %S does not exist"]
-        5
-        ("/home/pineapple/.emacs.d/.local/straight/build-30.1/dape/dape.elc"
-         . 2690)]
+        5 "\12\12(fn CONFIG)"]
       command "node" :type "pwa-node" :request "attach" command-args
       ("/home/pineapple/.doom.d/debug-adapters/js-debug/src/dapDebugServer.js"
        :autoport)
@@ -173,9 +167,7 @@
         [dape-ensure-command dape-config-get :runtimeExecutable
                              dape--ensure-executable plist-get command-args
                              file-exists-p user-error "File %S does not exist"]
-        5
-        ("/home/pineapple/.emacs.d/.local/straight/build-30.1/dape/dape.elc"
-         . 2690)]
+        5 "\12\12(fn CONFIG)"]
       command "node" :type "pwa-chrome" command-args
       ("/home/pineapple/.doom.d/debug-adapters/js-debug/src/dapDebugServer.js"
        :autoport)
@@ -254,13 +246,9 @@
               "vscode.java.resolveMainClass" file-name-nondirectory
               directory-file-name dape-cwd seq-find
               #[257 "\300\1\301\"\302 \232\207"
-                    [plist-get :filePath buffer-file-name] 4
-                    ("/home/pineapple/.emacs.d/.local/straight/build-30.1/dape/dape.elc"
-                     . 2725)]
+                    [plist-get :filePath buffer-file-name] 4 "\12\12(fn VAL)"]
               0 plist-get nil]
-             8
-             ("/home/pineapple/.emacs.d/.local/straight/build-30.1/dape/dape.elc"
-              . 2709)]
+             8 "\12\12(fn KEY)"]
            :filePath expand-file-name dape-buffer-default dape-cwd]
           3]
       :mainClass
@@ -271,13 +259,9 @@
               "vscode.java.resolveMainClass" file-name-nondirectory
               directory-file-name dape-cwd seq-find
               #[257 "\300\1\301\"\302 \232\207"
-                    [plist-get :filePath buffer-file-name] 4
-                    ("/home/pineapple/.emacs.d/.local/straight/build-30.1/dape/dape.elc"
-                     . 2725)]
+                    [plist-get :filePath buffer-file-name] 4 "\12\12(fn VAL)"]
               0 plist-get nil]
-             8
-             ("/home/pineapple/.emacs.d/.local/straight/build-30.1/dape/dape.elc"
-              . 2709)]
+             8 "\12\12(fn KEY)"]
            :mainClass]
           2]
       :projectName
@@ -288,13 +272,9 @@
               "vscode.java.resolveMainClass" file-name-nondirectory
               directory-file-name dape-cwd seq-find
               #[257 "\300\1\301\"\302 \232\207"
-                    [plist-get :filePath buffer-file-name] 4
-                    ("/home/pineapple/.emacs.d/.local/straight/build-30.1/dape/dape.elc"
-                     . 2725)]
+                    [plist-get :filePath buffer-file-name] 4 "\12\12(fn VAL)"]
               0 plist-get nil]
-             8
-             ("/home/pineapple/.emacs.d/.local/straight/build-30.1/dape/dape.elc"
-              . 2709)]
+             8 "\12\12(fn KEY)"]
            :projectName]
           2]
       :args "" :stopOnEntry nil :vmArgs
@@ -308,10 +288,7 @@
       command "node" command-args
       ("/home/pineapple/.doom.d/debug-adapters/php-debug/extension/out/phpDebug.js")
       :type "php" modes (php-mode php-ts-mode) :port 9003)))
- '(package-selected-packages '(ereader))
- '(projectile-ignored-projects '("~/" "~/.emacs.d/"))
- '(window-min-height 20)
- '(window-min-width 20))
+ '(scroll-conservatively 101))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

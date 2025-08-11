@@ -1,6 +1,69 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
+
+;; ============================
+;;           TESTING
+;; ============================
+
+;; nothing to test...
+
+;; ============================
+
+
+;; |-------------------------------------------------------------------------------------------------------------------------------------------|
+;; |++++++++++++++++++++++++++++++++++++++++++++++++++++++           !VANITY!            ++++++++++++++++++++++++++++++++++++++++++++++++++++++|
+;; |-------------------------------------------------------------------------------------------------------------------------------------------|
+
+(package! beacon)
+
+(package! zenburn-theme)
+
+(package! marginalia)
+
+(package! volatile-highlights)
+
+(package! line-reminder)
+
+(package! org-bullets)
+(package! org-modern)
+
+(package! scroll-on-jump)
+
+(package! highlight-parentheses)
+
+;; |-------------------------------------------------------------------------------------------------------------------------------------------|
+;; |++++++++++++++++++++++++++++++++++++++++++++++++++++++        !FUNCTIONALITY!        ++++++++++++++++++++++++++++++++++++++++++++++++++++++|
+;; |-------------------------------------------------------------------------------------------------------------------------------------------|
+
+(package! with-venv)
+(package! pyvenv)
+
+(package! fuzzy)
+
+(package! org-download)
+(unpin! org-roam)
+(package! org-roam-ui)
+
+(package! consult)
+
+(package! inhibit-mouse)
+
+(package! browse-kill-ring)
+
+(package! drag-stuff)
+
+(when (package! lsp-bridge
+        :recipe (:host github
+                 :repo "manateelazycat/lsp-bridge"
+                 :branch "master"
+                 :files ("*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
+                 ;; do not perform byte compilation or native compilation for lsp-bridge
+                 :build (:not compile)))
+  (package! markdown-mode)
+  (package! yasnippet))
+
+
 ;; To install a package with Doom you must declare them here and run 'doom sync'
 ;; on the command line, then restart Emacs for the changes to take effect -- or
 
@@ -16,7 +79,7 @@
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify
-;; `:files' in the `:recipe':
+;; `:files' in The `:recipe':
 ;; (package! this-package
 ;;   :recipe (:host github :repo "username/repo"
 ;;            :files ("some-file.el" "src/lisp/*.el")))
@@ -47,44 +110,3 @@
 ;; (unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;; (unpin! t)
-(package! dape :disable t)
-(package! dap-mode)
-(package! beacon)
-(package! with-venv)
-(package! pyvenv)
-(package! fuzzy)
-(package! calibredb)
-(package! nov)
-;; (package! nov-xwidget)
-;; (use-package nov-xwidget
-;;   :demand t
-;;   :after nov
-;;   :config
-;;   (define-key nov-mode-map (kbd "o") 'nov-xwidget-view)
-;;   (add-hook 'nov-mode-hook 'nov-xwidget-inject-all-files))
-;; (package! ereader)
-(package! org-download)
-(unpin! org-roam)
-(package! org-roam-ui)
-(package! zenburn-theme)
-(package! leuven-theme)
-(package! consult)
-(package! marginalia)
-(package! yascroll)
-(package! volatile-highlights)
-(package! inhibit-mouse)
-(package! line-reminder)
-(package! switch-window)
-(package! browse-kill-ring)
-(package! drag-stuff)
-(package! racket-mode)
-(package! org-bullets)
-(package! org-modern)
-(package! gruvbox-theme)
-(package! scroll-on-jump)
-(package! scroll-on-drag)
-(package! rainbow-delimiters)
-(package! highlight-parentheses)
-;; (package! prism)
-;; (package! minimap)
-;; (package! sublimity)

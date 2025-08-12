@@ -62,8 +62,8 @@
 ;;      DISABLE PACKAGES
 ;; ============================
 
-(package! lsp-mode :disable t)
-(package! dap-mode :disable t)
+;; (package! lsp-mode :disable t)
+;; (package! dap-mode :disable t)
 
 
 ;; To install a package with Doom you must declare them here and run 'doom sync'

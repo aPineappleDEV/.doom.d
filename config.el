@@ -165,6 +165,7 @@
 ;;          PROJECTILE
 ;; ============================
 (setq! projectile-project-search-path '("/mnt/6F3BD10716AFAD5C/CODE/"))
+(setq! projectile-ignored-projects '("~/" "~/.doom.d" "~/.emacs.d" "/mnt/6F3BD10716AFAD5C/NOTES"))
 
 ;; ============================
 ;;          EVIL STUFF
@@ -179,16 +180,40 @@
 (map! "M-<down>" 'drag-stuff-down)
 
 ;; ============================
+;;           LOOKUP
+;; ============================
+(map! :leader
+      :prefix
+      :desc "+lookup"
+      "c l")
+(map! :leader
+      :desc "lookup documentation"
+      "c l k"
+      '+lookup/documentation)
+(map! :leader
+      :desc "lookup definition"
+      "c l d"
+      '+lookup/definition)
+(map! :leader
+      :desc "lookup references"
+      "c l D"
+      '+lookup/references)
+(map! :leader
+      :desc "lookup implementation"
+      "c l i"
+      '+lookup/implementations)
+(map! :leader
+      :desc "lookup type definition"
+      "c l t"
+      '+lookup/type-definition)
+
+;; ============================
 ;;         LSP BRIDGE
 ;; ============================
 
+
 (setq! lsp-bridge-python-lsp-server "pylsp")
-
 (setq! lsp-bridge-enable-hover-diagnostic t)
-
-(use-package! lsp-bridge
-  :config
-  (global-lsp-bridge-mode))
 
 (map! :leader
       :desc "Rename symbol (LSP-BRIDGE)"
@@ -204,46 +229,26 @@
       :desc "Popup documentation (LSP-BRIDGE)"
       "c k"
       'lsp-bridge-popup-documentation)
-(map! :leader
-      :desc "lookup documentation"
-      "c l k"
-      '+lookup/documentation)
 
 (map! :leader
       :desc "Go to definition (LSP-BRIDGE)"
       "c d"
       'lsp-bridge-find-def)
-(map! :leader
-      :desc "lookup definition"
-      "c l d"
-      '+lookup/definition)
 
 (map! :leader
       :desc "Find references (LSP-BRIDGE)"
       "c D"
       'lsp-bridge-find-references)
-(map! :leader
-      :desc "lookup references"
-      "c l D"
-      '+lookup/references)
 
 (map! :leader
       :desc "Find implementation (LSP-BRIDGE)"
       "c i"
       'lsp-bridge-find-impl)
-(map! :leader
-      :desc "lookup implementation"
-      "c l i"
-      '+lookup/implementations)
 
 (map! :leader
       :desc "Find type definition (LSP-BRIDGE)"
       "c t"
       'lsp-bridge-find-type-def)
-(map! :leader
-      :desc "lookup type definition"
-      "c l t"
-      '+lookup/type-definition)
 
 (map! :leader
       :desc "Documentation in buffer (LSP-BRIDGE)"

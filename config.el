@@ -183,9 +183,7 @@
 ;;           LOOKUP
 ;; ============================
 (map! :leader
-      :prefix
-      :desc "+lookup"
-      "c l")
+      :prefix ("c l" . "lookup"))
 (map! :leader
       :desc "lookup documentation"
       "c l k"
@@ -211,6 +209,9 @@
 ;;         LSP BRIDGE
 ;; ============================
 
+(use-package! lsp-bridge
+  :config
+  (global-lsp-bridge-mode))
 
 (setq! lsp-bridge-python-lsp-server "pylsp")
 (setq! lsp-bridge-enable-hover-diagnostic t)

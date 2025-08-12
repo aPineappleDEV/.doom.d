@@ -1,6 +1,5 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-
 ;; |0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000|
 ;; |+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+- beginning of my configuration +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-|
 ;; |0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000|
@@ -108,6 +107,8 @@
 
 (setq +doom-dashboard-ascii-banner-fn #'my-ascii-art)
 
+(define-derived-mode +doom-dashboard-mode special-mode
+  (format "pineapples are good"))
 
 ;; ============================
 ;;        BEACON MODE
@@ -180,9 +181,6 @@
 ;; ============================
 ;;         LSP BRIDGE
 ;; ============================
-
-(add-hook 'lsp-bridge-mode-hook (lambda() (company-mode 0)))
-(add-hook 'lsp-bridge-mode-hook (lambda() (flycheck-mode 0)))
 
 (setq! lsp-bridge-python-lsp-server "pylsp")
 
@@ -279,7 +277,6 @@
 (add-hook 'prog-mode-hook #'highlight-parentheses-mode)
 (add-hook 'minibuffer-setup-hook #'highlight-parentheses-minibuffer-setup)
 
-
 ;; ============================
 ;;          ORG STUFF
 ;; ============================
@@ -291,6 +288,7 @@
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 (require 'org-download)
+(add-hook 'org-mode-hook 'org-download-enable)
 (add-hook 'dired-mode-hook 'org-download-enable)
 
 (setq org-roam-directory "/mnt/6F3BD10716AFAD5C/NOTES/")
@@ -366,6 +364,7 @@
 
   ;; Actions that themselves scroll.
   (scroll-on-jump-with-scroll-advice-add evil-goto-line)
+  (scroll-on-jump-with-scroll-advice-add evil-goto-first-line)
   (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
   (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
   (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
@@ -378,7 +377,7 @@
 
 (global-set-key (kbd "<C-M-next>") (scroll-on-jump-interactive 'diff-hl-next-hunk))
 (global-set-key (kbd "<C-M-prior>") (scroll-on-jump-interactive 'diff-hl-previous-hunk))
-(setq! scroll-on-jump-duration 0.6)
+(setq! scroll-on-jump-duration 0.4)
 
 ;; |0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000|
 ;; |+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-    end of my configuration    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-|

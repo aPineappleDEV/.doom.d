@@ -19,12 +19,6 @@
 
 (package! zenburn-theme)
 
-(package! marginalia)
-
-(package! volatile-highlights)
-
-(package! line-reminder)
-
 (package! org-bullets)
 (package! org-modern)
 
@@ -36,6 +30,8 @@
 ;; |++++++++++++++++++++++++++++++++++++++++++++++++++++++        !FUNCTIONALITY!        ++++++++++++++++++++++++++++++++++++++++++++++++++++++|
 ;; |-------------------------------------------------------------------------------------------------------------------------------------------|
 
+(package! line-reminder)
+
 (package! with-venv)
 (package! pyvenv)
 
@@ -44,8 +40,6 @@
 (package! org-download)
 (unpin! org-roam)
 (package! org-roam-ui)
-
-(package! consult)
 
 (package! inhibit-mouse)
 
@@ -62,6 +56,14 @@
                  :build (:not compile)))
   (package! markdown-mode)
   (package! yasnippet))
+
+
+;; ============================
+;;      DISABLE PACKAGES
+;; ============================
+
+(package! lsp-mode :disable t)
+(package! dap-mode :disable t)
 
 
 ;; To install a package with Doom you must declare them here and run 'doom sync'

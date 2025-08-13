@@ -23,12 +23,17 @@
 (package! org-modern)
 
 (package! scroll-on-jump)
+(package! ultra-scroll)
+(package! smooth-scroll)
+(package! smooth-scrolling)
 
 (package! highlight-parentheses)
 
 ;; |-------------------------------------------------------------------------------------------------------------------------------------------|
 ;; |++++++++++++++++++++++++++++++++++++++++++++++++++++++        !FUNCTIONALITY!        ++++++++++++++++++++++++++++++++++++++++++++++++++++++|
 ;; |-------------------------------------------------------------------------------------------------------------------------------------------|
+
+(package! indent-bars)
 
 (package! line-reminder)
 
@@ -62,8 +67,9 @@
 ;;      DISABLE PACKAGES
 ;; ============================
 
-;; (package! lsp-mode :disable t)
-;; (package! dap-mode :disable t)
+(package! lsp-mode :disable t)
+(package! eglot :disable t)
+(package! dap-mode :disable t)
 
 
 ;; To install a package with Doom you must declare them here and run 'doom sync'

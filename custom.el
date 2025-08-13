@@ -288,7 +288,8 @@
       command "node" command-args
       ("/home/pineapple/.doom.d/debug-adapters/php-debug/extension/out/phpDebug.js")
       :type "php" modes (php-mode php-ts-mode) :port 9003)))
- '(scroll-conservatively 101))
+ '(ignored-local-variable-values '((elisp-autofmt-format-quoted)))
+ '(package-selected-packages '(eglot)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

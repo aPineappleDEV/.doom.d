@@ -8,7 +8,9 @@
 ;;           TESTING
 ;; ============================
 
+
 ;; nothing to test...
+
 
 ;; ============================
 
@@ -24,7 +26,7 @@
 (setq doom-theme 'doom-gruvbox)
 
 ;; oooooo FONT  ooooooo
-(setq! doom-font (font-spec :family "Unifont" :size 20 :weight 'medium))
+(setq! doom-font (font-spec :family "Unifont" :size 18 :weight 'medium))
 
 ;; change the git file/dir name background color in vterm to make the file/dir name readable
 (after! vterm
@@ -122,6 +124,14 @@
 ;; ============================
 (setq! doom-modeline-total-line-number t)
 
+;; ============================
+;;       SMOOTH SCROLL
+;; ============================
+(smooth-scrolling-mode 1)
+(ultra-scroll-mode 1)
+(setq scroll-conservatively 1000)
+
+
 
 ;; |-------------------------------------------------------------------------------------------------------------------------------------------|
 ;; |++++++++++++++++++++++++++++++++++++++++++++++++++++++        !FUNCTIONALITY!        ++++++++++++++++++++++++++++++++++++++++++++++++++++++|
@@ -152,6 +162,8 @@
 ;; unbind C-x C-z so i dont accidentally close the window
 (global-unset-key (kbd "C-x C-z"))
 
+;; set garbage collection threshold
+(setq gc-cons-threshold (* 256 1024 1024))
 
 ;; ============================
 ;;          Kill Ring
@@ -165,7 +177,7 @@
 ;;          PROJECTILE
 ;; ============================
 (setq! projectile-project-search-path '("/mnt/6F3BD10716AFAD5C/CODE/"))
-(setq! projectile-ignored-projects '("~/" "~/.doom.d" "~/.emacs.d" "/mnt/6F3BD10716AFAD5C/NOTES"))
+(setq! projectile-ignored-projects '("~/" "~/.doom.d/" "~/.emacs.d/" "/mnt/6F3BD10716AFAD5C/NOTES/"))
 
 ;; ============================
 ;;          EVIL STUFF
@@ -184,25 +196,31 @@
 ;; ============================
 (map! :leader
       :prefix ("c l" . "lookup"))
+
 (map! :leader
+      :prefix ("c l" . "lookup")
       :desc "lookup documentation"
-      "c l k"
+      "k"
       '+lookup/documentation)
 (map! :leader
+      :prefix ("c l" . "lookup")
       :desc "lookup definition"
-      "c l d"
+      "d"
       '+lookup/definition)
 (map! :leader
+      :prefix ("c l" . "lookup")
       :desc "lookup references"
-      "c l D"
+      "D"
       '+lookup/references)
 (map! :leader
+      :prefix ("c l" . "lookup")
       :desc "lookup implementation"
-      "c l i"
+      "i"
       '+lookup/implementations)
 (map! :leader
+      :prefix ("c l" . "lookup")
       :desc "lookup type definition"
-      "c l t"
+      "t"
       '+lookup/type-definition)
 
 ;; ============================

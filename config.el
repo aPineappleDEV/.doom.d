@@ -29,9 +29,6 @@
 ;; dark mode
 (setq doom-theme 'doom-gruvbox)
 
-;; oooooo FONT  ooooooo
-(setq! doom-font (font-spec :family "Unifont" :size 18 :weight 'medium))
-
 ;; change the git file/dir name background color in vterm to make the file/dir name readable
 (after! vterm
   (set-face-attribute 'vterm-color-green nil :background "black")
@@ -178,8 +175,8 @@
 ;; ============================
 ;;          PROJECTILE
 ;; ============================
-(setq! projectile-project-search-path '("/mnt/6F3BD10716AFAD5C/CODE/"))
-(setq! projectile-ignored-projects '("~/" "~/.doom.d/" "~/.emacs.d/" "/mnt/6F3BD10716AFAD5C/NOTES/"))
+(setq! projectile-project-search-path '("/CODE/"))
+(setq! projectile-ignored-projects '("~/" "~/.doom.d/" "~/.emacs.d/" "~/NOTES/"))
 
 ;; ============================
 ;;          EVIL STUFF
@@ -307,7 +304,7 @@
 ;;          ORG STUFF
 ;; ============================
 
-(setq org-directory "/mnt/6F3BD10716AFAD5C/NOTES/")
+(setq org-directory "~/NOTES/")
 (with-eval-after-load 'org (global-org-modern-mode))
 
 (require 'org-bullets)
@@ -317,7 +314,7 @@
 (add-hook 'org-mode-hook 'org-download-enable)
 (add-hook 'dired-mode-hook 'org-download-enable)
 
-(setq org-roam-directory "/mnt/6F3BD10716AFAD5C/NOTES/")
+(setq org-roam-directory "~/NOTES/")
 (use-package! org-roam-ui
     :after org-roam ;; or :after org
 ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
@@ -348,7 +345,7 @@
 ;;            DEFT
 ;; ============================
 
-(setq! deft-directory '"/mnt/6F3BD10716AFAD5C/NOTES/")
+(setq! deft-directory '"~/NOTES/")
 (setq! deft-extensions '("org"))
 (setq! deft-recursive 't)
 
@@ -451,7 +448,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-;; (setq org-directory "/mnt/6F3BD10716AFAD5C/NOTES/")
+;; (setq org-directory "~/NOTES/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an

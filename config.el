@@ -34,11 +34,17 @@
   (set-face-attribute 'vterm-color-green nil :background "black")
   )
 
+(setq! doom-font (font-spec :size 25))
+
 ;; maximize window frame on open
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; dont jump windows while scrolling
 (setq scroll-conservatively 1000)
+
+(good-scroll-mode 1)
+(setq! good-scroll-duration 0.05)
+(setq! good-scroll-step 360)
 
 ;; ============================
 ;;   DASHBOARD CUSTOMIZATION
@@ -147,7 +153,7 @@
 (global-line-reminder-mode t)
 
 ;; prevent usage of mouse
-(inhibit-mouse-mode t)
+;; (inhibit-mouse-mode t)
 
 ;; prevent auto save
 (auto-save-mode -1)
@@ -193,104 +199,104 @@
 ;; ============================
 ;;           LOOKUP
 ;; ============================
-(map! :leader
-      :prefix ("c l" . "lookup"))
+;; (map! :leader
+;;       :prefix ("c l" . "lookup"))
 
-(map! :leader
-      :prefix ("c l" . "lookup")
-      :desc "lookup documentation"
-      "k"
-      '+lookup/documentation)
-(map! :leader
-      :prefix ("c l" . "lookup")
-      :desc "lookup definition"
-      "d"
-      '+lookup/definition)
-(map! :leader
-      :prefix ("c l" . "lookup")
-      :desc "lookup references"
-      "D"
-      '+lookup/references)
-(map! :leader
-      :prefix ("c l" . "lookup")
-      :desc "lookup implementation"
-      "i"
-      '+lookup/implementations)
-(map! :leader
-      :prefix ("c l" . "lookup")
-      :desc "lookup type definition"
-      "t"
-      '+lookup/type-definition)
+;; (map! :leader
+;;       :prefix ("c l" . "lookup")
+;;       :desc "lookup documentation"
+;;       "k"
+;;       '+lookup/documentation)
+;; (map! :leader
+;;       :prefix ("c l" . "lookup")
+;;       :desc "lookup definition"
+;;       "d"
+;;       '+lookup/definition)
+;; (map! :leader
+;;       :prefix ("c l" . "lookup")
+;;       :desc "lookup references"
+;;       "D"
+;;       '+lookup/references)
+;; (map! :leader
+;;       :prefix ("c l" . "lookup")
+;;       :desc "lookup implementation"
+;;       "i"
+;;       '+lookup/implementations)
+;; (map! :leader
+;;       :prefix ("c l" . "lookup")
+;;       :desc "lookup type definition"
+;;       "t"
+;;       '+lookup/type-definition)
 
-;; ============================
-;;         LSP BRIDGE
-;; ============================
+;; ;; ============================
+;; ;;         LSP BRIDGE
+;; ;; ============================
 
-(use-package! lsp-bridge
-  :config
-  (global-lsp-bridge-mode))
+;; (use-package! lsp-bridge
+;;   :config
+;;   (global-lsp-bridge-mode))
 
-(setq! lsp-bridge-python-lsp-server "pylsp")
-(setq! lsp-bridge-enable-hover-diagnostic t)
+;; (setq! lsp-bridge-python-lsp-server "pylsp")
+;; (setq! lsp-bridge-enable-hover-diagnostic t)
 
-(map! :leader
-      :desc "Rename symbol (LSP-BRIDGE)"
-      "c r"
-      'lsp-bridge-rename)
+;; (map! :leader
+;;       :desc "Rename symbol (LSP-BRIDGE)"
+;;       "c r"
+;;       'lsp-bridge-rename)
 
-(map! :leader
-      :desc "Format code (LSP-BRIDGE)"
-      "c f"
-      'lsp-bridge-code-format)
+;; (map! :leader
+;;       :desc "Format code (LSP-BRIDGE)"
+;;       "c f"
+;;       'lsp-bridge-code-format)
 
-(map! :leader
-      :desc "Popup documentation (LSP-BRIDGE)"
-      "c k"
-      'lsp-bridge-popup-documentation)
+;; (map! :leader
+;;       :desc "Popup documentation (LSP-BRIDGE)"
+;;       "c k"
+;;       'lsp-bridge-popup-documentation)
 
-(map! :leader
-      :desc "Go to definition (LSP-BRIDGE)"
-      "c d"
-      'lsp-bridge-find-def)
+;; (map! :leader
+;;       :desc "Go to definition (LSP-BRIDGE)"
+;;       "c d"
+;;       'lsp-bridge-find-def)
 
-(map! :leader
-      :desc "Find references (LSP-BRIDGE)"
-      "c D"
-      'lsp-bridge-find-references)
+;; (map! :leader
+;;       :desc "Find references (LSP-BRIDGE)"
+;;       "c D"
+;;       'lsp-bridge-find-references)
 
-(map! :leader
-      :desc "Find implementation (LSP-BRIDGE)"
-      "c i"
-      'lsp-bridge-find-impl)
+;; (map! :leader
+;;       :desc "Find implementation (LSP-BRIDGE)"
+;;       "c i"
+;;       'lsp-bridge-find-impl)
 
-(map! :leader
-      :desc "Find type definition (LSP-BRIDGE)"
-      "c t"
-      'lsp-bridge-find-type-def)
+;; (map! :leader
+;;       :desc "Find type definition (LSP-BRIDGE)"
+;;       "c t"
+;;       'lsp-bridge-find-type-def)
 
-(map! :leader
-      :desc "Documentation in buffer (LSP-BRIDGE)"
-      "c b d"
-      'lsp-bridge-show-documentation)
+;; (map! :leader
+;;       :desc "Documentation in buffer (LSP-BRIDGE)"
+;;       "c b d"
+;;       'lsp-bridge-show-documentation)
 
-(map! :leader
-      :desc "List diagnostics (LSP-BRIDGE)"
-      "c x"
-      'lsp-bridge-diagnostic-list)
+;; (map! :leader
+;;       :desc "List diagnostics (LSP-BRIDGE)"
+;;       "c x"
+;;       'lsp-bridge-diagnostic-list)
 
-(map! :leader
-      :desc "Code actions (LSP-BRIDGE)"
-      "c a"
-      'lsp-bridge-code-action)
+;; (map! :leader
+;;       :desc "Code actions (LSP-BRIDGE)"
+;;       "c a"
+;;       'lsp-bridge-code-action)
 
-;; ============================
-;;        DAPE DEBUGGER
-;; ============================
-(map! "<f5>" 'dape-quit)
-(map! "<f7>" 'dape-continue)
-(map! "<f8>" 'dape-next)
-(map! "<f6>" 'dape-step-in)
-(map! "<f9>" 'dape-step-out)
+;; ;; ============================
+;; ;;        DAPE DEBUGGER
+;; ;; ============================
+;; (map! "<f5>" 'dape-quit)
+;; (map! "<f7>" 'dape-continue)
+;; (map! "<f8>" 'dape-next)
+;; (map! "<f6>" 'dape-step-in)
+;; (map! "<f9>" 'dape-step-out)
 
 ;; ============================
 ;;  OTHER PROGRAMMING PACKAGES
@@ -320,13 +326,14 @@
 ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
 ;;         a hookable mode anymore, you're advised to pick something yourself
 ;;         if you don't care about startup time, use
-;;  :hook (after-init . org-roam-ui-mode)
+   ;; :hook (after-init . org-roam-ui-mode)
     :config
     (setq org-roam-ui-sync-theme t
           org-roam-ui-follow t
           org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
+          org-roam-ui-open-on-start nil))
 
+(org-roam-ui-mode 1)
 (defun my-org-faces ()
     (set-face-attribute 'org-document-title nil :height 2.5)
     (set-face-attribute 'org-document-info nil :height 2.5)
@@ -337,7 +344,10 @@
     (set-face-attribute 'org-level-4 nil :height 1.4)
     (set-face-attribute 'org-level-5 nil :height 1.2)
     )
-
+(advice-add 'browse-url-default-browser :override
+            (lambda (url &rest args)
+              (start-process-shell-command "open-url" nil (concat "am start -a android.intent.action.VIEW -d " url))))
+(setq browse-url-browser-function 'browse-url-xdg-open)
 (add-hook 'org-mode-hook #'my-org-faces)
 (add-hook 'org-mode-hook 'org-modern-mode)
 

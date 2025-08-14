@@ -23,6 +23,7 @@
 (package! org-modern)
 
 (package! scroll-on-jump)
+(package! good-scroll)
 
 (package! highlight-parentheses)
 
@@ -32,8 +33,8 @@
 
 (package! line-reminder)
 
-(package! with-venv)
-(package! pyvenv)
+;; (package! with-venv)
+;; (package! pyvenv)
 
 (package! fuzzy)
 
@@ -41,19 +42,19 @@
 (unpin! org-roam)
 (package! org-roam-ui)
 
-(package! inhibit-mouse)
+;; (package! inhibit-mouse)
 
 (package! drag-stuff)
 
-(when (package! lsp-bridge
-        :recipe (:host github
-                 :repo "manateelazycat/lsp-bridge"
-                 :branch "master"
-                 :files ("*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
-                 ;; do not perform byte compilation or native compilation for lsp-bridge
-                 :build (:not compile)))
-  (package! markdown-mode)
-  (package! yasnippet))
+;; (when (package! lsp-bridge
+;;         :recipe (:host github
+;;                  :repo "manateelazycat/lsp-bridge"
+;;                  :branch "master"
+;;                  :files ("*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
+;;                  ;; do not perform byte compilation or native compilation for lsp-bridge
+;;                  :build (:not compile)))
+;;   (package! markdown-mode)
+;;   (package! yasnippet))
 
 
 ;; ============================

@@ -36,6 +36,9 @@
 ;; maximize window frame on open
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
+;; dont jump windows while scrolling
+(setq scroll-conservatively 1000)
+
 ;; ============================
 ;;   DASHBOARD CUSTOMIZATION
 ;; ============================
@@ -121,6 +124,9 @@
 
 ;; set garbage collection threshold
 (setq gc-cons-threshold (* 256 1024 1024))
+
+;; show number of matches in modeline while searching
+(global-anzu-mode +1)
 
 ;; ============================
 ;;          Kill Ring

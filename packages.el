@@ -43,8 +43,6 @@
 
 (package! inhibit-mouse)
 
-(package! browse-kill-ring)
-
 (package! drag-stuff)
 
 (when (package! lsp-bridge
@@ -65,6 +63,28 @@
 (package! lsp-mode :disable t)
 (package! eglot :disable t)
 (package! dap-mode :disable t)
+(package! htmlize :disable t)
+(package! ob-sync :disable t)
+(package! org-cliplink :disable t)
+(package! ox-clip :disable t)
+(package! toc-org :disable t)
+(package! pipenv :disable t)
+(package! pip-requirements :disable t)
+(package! nose :disable t)
+(package! python-pytest :disable t)
+(package! pyimport :disable t)
+(package! py-isort :disable t)
+(package! js2-refactor :disable t)
+(package! nodejs-repl :disable t)
+(package! skewer-mode :disable t)
+(package! tide :disable t)
+(package! elisp-def :disable t)
+(package! elisp-demos :disable t)
+(package! macrostep :disable t)
+(package! overseer :disable t)
+(package! embark :disable t)
+(package! embabrk-consult :disable t)
+(package! buttercup :disable t)
 
 
 ;; To install a package with Doom you must declare them here and run 'doom sync'

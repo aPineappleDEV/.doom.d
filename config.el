@@ -43,7 +43,7 @@
 (setq scroll-conservatively 1000)
 
 (good-scroll-mode 1)
-(setq! good-scroll-duration 0.05)
+(setq! good-scroll-duration 0.10)
 (setq! good-scroll-step 360)
 
 ;; ============================

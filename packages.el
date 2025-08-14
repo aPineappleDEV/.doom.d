@@ -6,7 +6,9 @@
 ;;           TESTING
 ;; ============================
 
+
 ;; nothing to test...
+
 
 ;; ============================
 
@@ -16,8 +18,6 @@
 ;; |-------------------------------------------------------------------------------------------------------------------------------------------|
 
 (package! beacon)
-
-(package! zenburn-theme)
 
 (package! org-bullets)
 (package! org-modern)
@@ -85,6 +85,7 @@
 (package! embark :disable t)
 (package! embabrk-consult :disable t)
 (package! buttercup :disable t)
+
 
 
 ;; To install a package with Doom you must declare them here and run 'doom sync'

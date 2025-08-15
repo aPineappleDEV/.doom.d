@@ -9,7 +9,6 @@
 ;; ============================
 
 
-
 ;; nothing to test...
 
 
@@ -343,6 +342,13 @@
 
 (add-hook 'org-mode-hook #'my-org-faces)
 (add-hook 'org-mode-hook 'org-modern-mode)
+
+; journal
+
+(setq org-journal-time-prefix "* "
+      org-journal-date-prefix "#+TITLE"
+      org-journal-date-format "%A, %d-%m-%Y"
+      org-journal-file-format "%Y-%m-%d.org")
 
 ;; ============================
 ;;            DEFT

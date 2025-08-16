@@ -235,6 +235,19 @@
 (setq! lsp-bridge-python-lsp-server "pylsp")
 (setq! lsp-bridge-enable-hover-diagnostic t)
 
+(setq! acm-mode-map '(keymap (7 . acm-hide) (10 . acm-complete) (9 . acm-complete)
+                      (tab . acm-complete) (22 . acm-select-next-page)
+                      (27 keymap (108 . acm-hide) (107 . acm-doc-scroll-down)
+                          (106 . acm-doc-scroll-up) (100 . acm-doc-toggle) (117 . acm-filter)
+                          (104 . acm-complete)
+                          (72 . acm-insert-common) (118 . acm-select-prev-page)
+                          (46 . acm-select-first) (44 . acm-select-last)
+                          (112 . acm-select-prev) (110 . acm-select-next))
+                      (up . acm-select-prev) (down . acm-select-next)
+                      (remap keymap (previous-line . acm-select-prev)
+                             (next-line . acm-select-next))))
+
+
 (map! :leader
       :desc "Rename symbol (LSP-BRIDGE)"
       "c r"
@@ -491,3 +504,4 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+(message "config reloaded!")

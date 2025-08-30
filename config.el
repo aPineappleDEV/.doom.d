@@ -48,7 +48,7 @@
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-footer)
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-loaded)
-(add-hook! '+doom-dashboard-functions (hide-mode-line-mode 1))
+(setq! +doom-dashboard-functions '(#[(&rest _) ((hide-mode-line-mode 1)) (t)] doom-dashboard-widget-banner))
 (setq! +doom-dashboard--width 80)
 (setq! +doom-dashboard-name "P I N E A P P L E")
 (setq frame-title-format '("%b    |    E M A C S")
@@ -56,52 +56,52 @@
 
 (defun my-ascii-art ()
   (let* ((banner '(
-"                                          ⠒⠦⣄⣠⠄                            "
-"                                          ⣠⠀⠀⢹⣿⡆                           "
-"                                         ⣠⡏⠀⠀⢸⣿⣧                           "
-"                                         ⢀⣿⠀⠀⠀⣾⣿⡟⡆         ⣀⡀              "
-"                                         ⣾⡿⣆⠀⢰⣿⣿⡇⢹      ⣠⣴⣾⡟               "
-"                                        ⢀⡏⠀⠹⣆⣾⣿⣷⠇⠘⡇  ⢠⣴⣿⣿⣿⡿                "
-"                                 ⣀⡤⣶⠖⣤  ⢸⠀⠀⠀⣿⣿⣿⡟⠀⠀⢧⣤⣾⣿⣿⣿⡏⢠⠃   ⢠⠏           "
-"                          ⢀⡀    ⠚⠛⠛⢻⡀⠈⠳⣄⢸⠀⠀⠀⠀⢹⣿⣿⣦⣀⡀⢸⣿⣯⠛⢻⣿⣶⡟  ⢀⣤⣿           "
-"                           ⠙⢶⢤⡀     ⣇⠀⠀⠈⣿⠀⠀⠀⠘⣿⣿⣿⣽⣻⣿⣿⣿⡷⠋⠙⡿ ⣠⠔⣉⣠⠇            "
-"                            ⠈⠆⠙⠲⣄⡀  ⢻⠀⠀⠀⠸⣇⠀⠀⠀⣿⣿⣿⣿⣿⣾⣿⣿⣷⠶⠞⠛⣿⠹⠶⢿⡟             "
-"                            ⢤⡀⠄⠀⠈⠻⣤ ⢘⣦⠀⣦⣼⣧⠀⠀⠀⢻⣿⣿⣿⣿⠟⠃⠋⠀⠀⠀⠀⣿⣶⣤⡄⠃⣀⣤⣤⣶⡿⠁       "
-"                    ⠈⠙⠛⠻⢿⣆⠠⣄⡈⢻⣷⣔⢦⡀⠈⣷⣽⣿⡿⠃⢿⣿⡄⠀⠀⠸⣿⣿⠋⠁⠀⠀⣀⠀⠀⠀⣸⣿⣿⣿⣿⣿⣿⣽⠿⠋         "
-"                         ⠉⠳⣄⠙⢦⣽⣞⢧⡹⣿⣿⣿⣸⠀⠀⠈⢿⣿⣤⡄⢠⣿⣧⣀⣠⡶⢿⡿⠁⠀⢀⣿⣿⣿⣿⣿⡿⠟⠁           "
-"                    ⠰⠶⢤⣤⣀⣀⡀⠘⢦⡀⢹⣿⡏⠻⣝⣿⣿⡿⠀⠀⠀⣨⡿⠋⣷⣾⣿⠿⠋⠙⠿⢾⡇⠀⠀⣸⣿⣿⣿⣿⣏⣀⣤⣶⡖⢒⣶⡾⠋      "
-"                       ⠈⠙⠺⣭⣝⣾⣇⠀⢹⣷⡀⠹⣜⣿⣿⡶⣤⣴⣯⢀⣀⣻⣿⣟⡀⠀⠀⠀⢸⡇⠀⠀⣿⣿⣿⣏⣼⣿⣿⣿⣟⣠⠟⠉        "
-"                          ⠈⢻⣿⣿⠀⠀⢻⣷⡀⠙⠛⣿⣿⣿⣿⣿⣛⡋⣹⣿⠁⠀⠀⠀⠀⣼⣇⠀⢰⣿⣿⣿⣿⣿⣿⣿⠟⢛⠁          "
-"                            ⠘⢿⣧⠀⠀⠻⣿⣄⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⠀⢸⣿⡇⠀⢸⣿⣿⣿⡿⠟⢁⣴⠞            "
-"                   ⣀⣀⣀⣀⣀⣀⣀⡀  ⠈⢻⣷⣦⣀⣿⣿⣦⣬⣿⡟⣿⣿⣿⣿⣿⣿⣇⡀⠀⠀⢸⣿⡆⠀⣸⣿⠟⢁⣤⣾⣿⠛             "
-"               ███████╗███╗⠀⠀ ███╗ █████╗⠀⠀██████╗███████╗⠿⠿⠖⠋             "
-"               ██╔════╝████╗⠀████║██╔══██╗██╔════╝██╔════╝⡢⣄               "
-"               █████╗⠀⠀██╔████╔██║███████║██║⠀⠀⠀⠀⠀███████╗⣿⣌⢂              "
-"               ██╔══╝⠀⠀██║╚██╔╝██║██╔══██║██║⠀⠀⠀⠀⠀╚════██║⠈⣿ ⠂             "
-"               ███████╗██║⠀╚═╝⠀██║██║⠀⠀██║╚██████╗███████║⢶⡇ ⢠⠆            "
-"               ╚══════╝╚═╝⠀⠀⠀⠀⠀╚═╝╚═╝⠀⠀╚═╝⠀╚═════╝╚══════╝⠈⣷⣤⡏             "
-"                 ⢠⣶⣿⢿⡟⠛⢻⣿⣧⣤⡾⣻⣿⣧⣄⠀⠀⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⡿⣿⣾⣦⠀⠈⠙⠿⣆⠄⢻⡀⠛⣯              "
-"               ⣠⢴⣾⢿⣧⣿⣿⣶⣶⣞⣛⣻⣿⣻⡏⣛⣻⣷⣿⣷⣮⡿⠻⣿⣿⣿⠿⣿⡟⢿⣦⢹⡞⢮⡙⢿⣧⢠⠀⠀⠘⠀⠀⣧ ⠛⠃             "
-"              ⣼⣿⣿⣷⠾⣻⠋⠻⣿⣏⠋⠙⣟⡟⣻⣿⣿⣿⢻⣏⡟⣿⣿⣟⣿⣿⣿⣿⣿⣝⢷⣿⡇ ⠈⢿⣾⣿⣿⣶⡀⠀⠄⠆⢿                "
-"             ⣴⣿⢙⣿⡿⢴⡋⢀⣴⣿⡟⠙⠂⠈⣧⣿⣿⠟⠻⣾⣿⣿⣍⡉⠻⣾⣩⣿⣿⣿⣻⡿⣿⣅⡀ ⠘⣿⠟⠘⠛⢿⣾⣶⣀⡿                "
-"           ⢀⣼⣾⣿⡟⣿⣷⠀⣙⣛⣻⣿⣧⣤⣤⣴⣟⠛⢻⣿⣿⣿⣤⣤⣮⡟⣿⣷⣶⠗⣻⣿⣯⣷⣾⣿⠁  ⢸⣇   ⠙⣿⣿⠃                "
-"           ⣾⣿⣿⡟⣧⣾⣿⡛⢁⡤⡶⠀⢹⣿⣟⠁⣠⡄⠀⢿⠻⢧⣴⠏⢘⡇⣿⠛⠋⠈⠁⣿⣦⣙⣻⣿⡿⠂ ⢸⡟⠃   ⠘⠋                 "
-"          ⣸⣿⢻⣿⣄⣹⣿⣿⡛⣿⣹⣁⢀⣼⡇⢹⣿⣻⣷⣾⣿⣆⠸⠿⠋⠛⣛⣿⣦⡄⣀⣴⠿⡿⣿⣿⡿⡇                           "
-"         ⣰⡿⣿⠀⣿⣿⠇⠀⣿⣿⠋⠈⢉⣽⣿⣿⣄⣉⣂⣹⣶⠿⢿⣷⣶⣶⣿⣽⣿⡿⣻⢿⣭⠦⠀⣿⣯⣿⡇                           "
-"        ⣸⣿⣷⢙⣿⡏⣿⠀⠀⣿⣿⣶⡾⠛⣹⢶⣿⣿⡟⢻⡏⠰⣆⣈⢻⡎⢿⣋⡽⠛⢷⣹⡀⠀⠙⠀⣛⣿⣿⡇                           "
-"       ⢸⣿⣹⣿⣿⣿⡿⠛⠓⣛⣿⣿⢿⣃⡞⡟⠀⠈⢹⠙⢿⣣⡜⠃⠙⢹⣷⠘⠋⠘⠒⢚⣿⣿⣦⡤⢻⣻⣿⡟⠁                           "
-"       ⣸⣟⣿⡿⠀⢿⣶⣴⣿⣿⠃⢿⣌⣹⡛⢧⣤⣀⣸⡇⠼⠛⠳⠤⠶⢾⣿⣤⣄⣠⡤⠛⣛⣷⠘⣧⣴⢿⡟⠁                            "
-"      ⠈⢻⣿⡙⠳⠀⣨⣿⣿⢹⡿⣄⢸⣿⡏⠻⢂⣠⣼⣽⣿⣄⣀⣀⣴⡖⢛⣉⢻⣿⣷⠀⣠⢿⣿⡼⣿⣋⣾⡵⠃                            "
-"      ⠢⣼⣿⡹⢶⣤⣿⢿⣿⠘⢧⡿⠶⣿⣷⣿⣟⣻⣿⡆⠉⢻⣿⣿⣿⠃⢠⠿⣶⣷⠘⠚⣇⠀⣿⣦⣶⣾⡏                              "
-"       ⣈⣿⣷⢺⢿⢻⠈⣿⡶⠀⢀⣾⣿⣿⣿⠟⠛⠿⡟⢠⡀⡇⠹⣤⡼⠃⠀⢉⣿⡄⠀⣈⣼⣿⡛⡛⠋                               "
-"       ⢀⣈⣳⡎⠈⣏⠋⣻⣿⣿⠋⠀⣿⠃⠹⣦⣾⣶⡇⢸⡄⣿⡄⠀⠀⠀⢉⡿⣯⣿⣾⡿⣿⣽⣧⠟                                "
-"         ⠙⢧⣀⠀⣠⣿⣿⠋⠳⡄⢿⣦⣄⠋⠀⠈⠛⠛⠳⣿⣿⡦⣾⡟⠉⣶⡈⣿⣿⡞⣛⡉                                  "
-"          ⠘⠿⢷⣿⡇⣿⠀⠀⢷⠘⣿⠛⢀⣇⣀⣠⣴⣾⣿⠉⠙⣏⣀⣾⠿⣿⣿⢋⡌⠉⠉                                  "
-"             ⢷⣻⣿⡦⠴⠾⠂⢻⣶⠟⣋⣉⣉⡙⢻⣗⠀⠺⣾⣽⡿⠶⣾⡿⠋⠁                                    "
-"              ⠈⠻⣦⣤⣤⣤⡟⠙⣟⣻⡿⠛⣿⠿⣿⢫⠞⢋⣠⣤⠿⡥⠤                                      "
-"                  ⠈⢻⣿⣦⡙⠁⢠⠦⠼⠶⢿⣟⠛⠛⠃                                          "
-"                    ⠈⡙⠛⠒⠒⠲⢿⡏⣛⠛⡀                                            "
-))
+                   "                                          ⠒⠦⣄⣠⠄                            "
+                   "                                          ⣠⠀⠀⢹⣿⡆                           "
+                   "                                         ⣠⡏⠀⠀⢸⣿⣧                           "
+                   "                                         ⢀⣿⠀⠀⠀⣾⣿⡟⡆         ⣀⡀              "
+                   "                                         ⣾⡿⣆⠀⢰⣿⣿⡇⢹      ⣠⣴⣾⡟               "
+                   "                                        ⢀⡏⠀⠹⣆⣾⣿⣷⠇⠘⡇  ⢠⣴⣿⣿⣿⡿                "
+                   "                                 ⣀⡤⣶⠖⣤  ⢸⠀⠀⠀⣿⣿⣿⡟⠀⠀⢧⣤⣾⣿⣿⣿⡏⢠⠃   ⢠⠏           "
+                   "                          ⢀⡀    ⠚⠛⠛⢻⡀⠈⠳⣄⢸⠀⠀⠀⠀⢹⣿⣿⣦⣀⡀⢸⣿⣯⠛⢻⣿⣶⡟  ⢀⣤⣿           "
+                   "                           ⠙⢶⢤⡀     ⣇⠀⠀⠈⣿⠀⠀⠀⠘⣿⣿⣿⣽⣻⣿⣿⣿⡷⠋⠙⡿ ⣠⠔⣉⣠⠇            "
+                   "                            ⠈⠆⠙⠲⣄⡀  ⢻⠀⠀⠀⠸⣇⠀⠀⠀⣿⣿⣿⣿⣿⣾⣿⣿⣷⠶⠞⠛⣿⠹⠶⢿⡟             "
+                   "                            ⢤⡀⠄⠀⠈⠻⣤ ⢘⣦⠀⣦⣼⣧⠀⠀⠀⢻⣿⣿⣿⣿⠟⠃⠋⠀⠀⠀⠀⣿⣶⣤⡄⠃⣀⣤⣤⣶⡿⠁       "
+                   "                    ⠈⠙⠛⠻⢿⣆⠠⣄⡈⢻⣷⣔⢦⡀⠈⣷⣽⣿⡿⠃⢿⣿⡄⠀⠀⠸⣿⣿⠋⠁⠀⠀⣀⠀⠀⠀⣸⣿⣿⣿⣿⣿⣿⣽⠿⠋         "
+                   "                         ⠉⠳⣄⠙⢦⣽⣞⢧⡹⣿⣿⣿⣸⠀⠀⠈⢿⣿⣤⡄⢠⣿⣧⣀⣠⡶⢿⡿⠁⠀⢀⣿⣿⣿⣿⣿⡿⠟⠁           "
+                   "                    ⠰⠶⢤⣤⣀⣀⡀⠘⢦⡀⢹⣿⡏⠻⣝⣿⣿⡿⠀⠀⠀⣨⡿⠋⣷⣾⣿⠿⠋⠙⠿⢾⡇⠀⠀⣸⣿⣿⣿⣿⣏⣀⣤⣶⡖⢒⣶⡾⠋      "
+                   "                       ⠈⠙⠺⣭⣝⣾⣇⠀⢹⣷⡀⠹⣜⣿⣿⡶⣤⣴⣯⢀⣀⣻⣿⣟⡀⠀⠀⠀⢸⡇⠀⠀⣿⣿⣿⣏⣼⣿⣿⣿⣟⣠⠟⠉        "
+                   "                          ⠈⢻⣿⣿⠀⠀⢻⣷⡀⠙⠛⣿⣿⣿⣿⣿⣛⡋⣹⣿⠁⠀⠀⠀⠀⣼⣇⠀⢰⣿⣿⣿⣿⣿⣿⣿⠟⢛⠁          "
+                   "                            ⠘⢿⣧⠀⠀⠻⣿⣄⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀⠀⢸⣿⡇⠀⢸⣿⣿⣿⡿⠟⢁⣴⠞            "
+                   "                   ⣀⣀⣀⣀⣀⣀⣀⡀  ⠈⢻⣷⣦⣀⣿⣿⣦⣬⣿⡟⣿⣿⣿⣿⣿⣿⣇⡀⠀⠀⢸⣿⡆⠀⣸⣿⠟⢁⣤⣾⣿⠛             "
+                   "               ███████╗███╗⠀⠀ ███╗ █████╗⠀⠀██████╗███████╗⠿⠿⠖⠋             "
+                   "               ██╔════╝████╗⠀████║██╔══██╗██╔════╝██╔════╝⡢⣄               "
+                   "               █████╗⠀⠀██╔████╔██║███████║██║⠀⠀⠀⠀⠀███████╗⣿⣌⢂              "
+                   "               ██╔══╝⠀⠀██║╚██╔╝██║██╔══██║██║⠀⠀⠀⠀⠀╚════██║⠈⣿ ⠂             "
+                   "               ███████╗██║⠀╚═╝⠀██║██║⠀⠀██║╚██████╗███████║⢶⡇ ⢠⠆            "
+                   "               ╚══════╝╚═╝⠀⠀⠀⠀⠀╚═╝╚═╝⠀⠀╚═╝⠀╚═════╝╚══════╝⠈⣷⣤⡏             "
+                   "                 ⢠⣶⣿⢿⡟⠛⢻⣿⣧⣤⡾⣻⣿⣧⣄⠀⠀⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⡿⣿⣾⣦⠀⠈⠙⠿⣆⠄⢻⡀⠛⣯              "
+                   "               ⣠⢴⣾⢿⣧⣿⣿⣶⣶⣞⣛⣻⣿⣻⡏⣛⣻⣷⣿⣷⣮⡿⠻⣿⣿⣿⠿⣿⡟⢿⣦⢹⡞⢮⡙⢿⣧⢠⠀⠀⠘⠀⠀⣧ ⠛⠃             "
+                   "              ⣼⣿⣿⣷⠾⣻⠋⠻⣿⣏⠋⠙⣟⡟⣻⣿⣿⣿⢻⣏⡟⣿⣿⣟⣿⣿⣿⣿⣿⣝⢷⣿⡇ ⠈⢿⣾⣿⣿⣶⡀⠀⠄⠆⢿                "
+                   "             ⣴⣿⢙⣿⡿⢴⡋⢀⣴⣿⡟⠙⠂⠈⣧⣿⣿⠟⠻⣾⣿⣿⣍⡉⠻⣾⣩⣿⣿⣿⣻⡿⣿⣅⡀ ⠘⣿⠟⠘⠛⢿⣾⣶⣀⡿                "
+                   "           ⢀⣼⣾⣿⡟⣿⣷⠀⣙⣛⣻⣿⣧⣤⣤⣴⣟⠛⢻⣿⣿⣿⣤⣤⣮⡟⣿⣷⣶⠗⣻⣿⣯⣷⣾⣿⠁  ⢸⣇   ⠙⣿⣿⠃                "
+                   "           ⣾⣿⣿⡟⣧⣾⣿⡛⢁⡤⡶⠀⢹⣿⣟⠁⣠⡄⠀⢿⠻⢧⣴⠏⢘⡇⣿⠛⠋⠈⠁⣿⣦⣙⣻⣿⡿⠂ ⢸⡟⠃   ⠘⠋                 "
+                   "          ⣸⣿⢻⣿⣄⣹⣿⣿⡛⣿⣹⣁⢀⣼⡇⢹⣿⣻⣷⣾⣿⣆⠸⠿⠋⠛⣛⣿⣦⡄⣀⣴⠿⡿⣿⣿⡿⡇                           "
+                   "         ⣰⡿⣿⠀⣿⣿⠇⠀⣿⣿⠋⠈⢉⣽⣿⣿⣄⣉⣂⣹⣶⠿⢿⣷⣶⣶⣿⣽⣿⡿⣻⢿⣭⠦⠀⣿⣯⣿⡇                           "
+                   "        ⣸⣿⣷⢙⣿⡏⣿⠀⠀⣿⣿⣶⡾⠛⣹⢶⣿⣿⡟⢻⡏⠰⣆⣈⢻⡎⢿⣋⡽⠛⢷⣹⡀⠀⠙⠀⣛⣿⣿⡇                           "
+                   "       ⢸⣿⣹⣿⣿⣿⡿⠛⠓⣛⣿⣿⢿⣃⡞⡟⠀⠈⢹⠙⢿⣣⡜⠃⠙⢹⣷⠘⠋⠘⠒⢚⣿⣿⣦⡤⢻⣻⣿⡟⠁                           "
+                   "       ⣸⣟⣿⡿⠀⢿⣶⣴⣿⣿⠃⢿⣌⣹⡛⢧⣤⣀⣸⡇⠼⠛⠳⠤⠶⢾⣿⣤⣄⣠⡤⠛⣛⣷⠘⣧⣴⢿⡟⠁                            "
+                   "      ⠈⢻⣿⡙⠳⠀⣨⣿⣿⢹⡿⣄⢸⣿⡏⠻⢂⣠⣼⣽⣿⣄⣀⣀⣴⡖⢛⣉⢻⣿⣷⠀⣠⢿⣿⡼⣿⣋⣾⡵⠃                            "
+                   "      ⠢⣼⣿⡹⢶⣤⣿⢿⣿⠘⢧⡿⠶⣿⣷⣿⣟⣻⣿⡆⠉⢻⣿⣿⣿⠃⢠⠿⣶⣷⠘⠚⣇⠀⣿⣦⣶⣾⡏                              "
+                   "       ⣈⣿⣷⢺⢿⢻⠈⣿⡶⠀⢀⣾⣿⣿⣿⠟⠛⠿⡟⢠⡀⡇⠹⣤⡼⠃⠀⢉⣿⡄⠀⣈⣼⣿⡛⡛⠋                               "
+                   "       ⢀⣈⣳⡎⠈⣏⠋⣻⣿⣿⠋⠀⣿⠃⠹⣦⣾⣶⡇⢸⡄⣿⡄⠀⠀⠀⢉⡿⣯⣿⣾⡿⣿⣽⣧⠟                                "
+                   "         ⠙⢧⣀⠀⣠⣿⣿⠋⠳⡄⢿⣦⣄⠋⠀⠈⠛⠛⠳⣿⣿⡦⣾⡟⠉⣶⡈⣿⣿⡞⣛⡉                                  "
+                   "          ⠘⠿⢷⣿⡇⣿⠀⠀⢷⠘⣿⠛⢀⣇⣀⣠⣴⣾⣿⠉⠙⣏⣀⣾⠿⣿⣿⢋⡌⠉⠉                                  "
+                   "             ⢷⣻⣿⡦⠴⠾⠂⢻⣶⠟⣋⣉⣉⡙⢻⣗⠀⠺⣾⣽⡿⠶⣾⡿⠋⠁                                    "
+                   "              ⠈⠻⣦⣤⣤⣤⡟⠙⣟⣻⡿⠛⣿⠿⣿⢫⠞⢋⣠⣤⠿⡥⠤                                      "
+                   "                  ⠈⢻⣿⣦⡙⠁⢠⠦⠼⠶⢿⣟⠛⠛⠃                                          "
+                   "                    ⠈⡙⠛⠒⠒⠲⢿⡏⣛⠛⡀                                            "
+                   ))
          (longest-line (apply #'max (mapcar #'length banner))))
     (put-text-property
      (point)
@@ -116,7 +116,12 @@
 (setq +doom-dashboard-ascii-banner-fn #'my-ascii-art)
 
 (define-derived-mode +doom-dashboard-mode special-mode
-  (format "pineapples are good"))
+  (format "pineapples are tasty"))
+
+
+(map! :leader
+      :desc "Switch to dashboard buffer"
+      "z" '+doom-dashboard/open)
 
 ;; ============================
 ;;        BEACON MODE
@@ -173,6 +178,88 @@
       :desc "Browse kill ring"
       "l k"
       'browse-kill-ring)
+
+;; ============================
+;;            EMMS
+;; ============================
+
+(emms-all)
+(add-hook 'emms-playlist-source-inserted-hook 'emms-playlist-shuffle)
+(add-hook 'emms-player-started-hook 'emms-show)
+(setq emms-mode-line-icon-color "red")
+(defun pauseOrShow ()
+  (if emms-player-paused-p
+      (message "Music is paused.")
+    (emms-show)))
+
+(setq! emms-player-paused-hook '(emms-playing-time-pause emms-lyrics-pause pauseOrShow))
+
+(setq emms-player-list '(emms-player-mpv)
+      emms-info-functions 'emms-info-native
+      emms-add-directory-tree "/mnt/6F3BD10716AFAD5C/moosic/")
+(setq emms-info-asynchronously nil)
+(setq emms-playlist-buffer-name "*Music*")
+(emms-history-load)
+(setq-default
+ emms-source-file-default-directory "/mnt/6F3BD10716AFAD5C/moosic/"
+
+ emms-source-playlist-default-format 'm3u
+ emms-playlist-mode-center-when-go t
+ emms-playlist-default-major-mode 'emms-playlist-mode
+ emms-show-format "| Now Playing: %s |"
+
+ emms-player-mpv-environment '("PULSE_PROP_media.role=music")
+ emms-player-mpv-parameters '("--quiet" "--really-quiet" "--no-audio-display" "--force-window=no" "--vo=null")
+
+ emms-volume-change-function 'emms-volume-mpv-change
+ emms-volume-mpv-method 'smart)
+
+(map! :leader
+      :prefix ("m" . "music (emms)"))
+
+(map! :leader
+      :desc "pause/play"
+      "m x" 'emms-pause)
+
+(map! :leader
+      :desc "lower volume"
+      "m -" 'emms-volume-lower)
+
+(map! :leader
+      :desc "raise volume"
+      "m =" 'emms-volume-raise)
+
+(map! :leader
+      :desc "play next"
+      "m k" 'emms-next)
+
+(map! :leader
+      :desc "play previous"
+      "m j" 'emms-previous)
+
+(map! :leader
+      :desc "browse playlist/queue"
+      "m b" 'emms-smart-browse)
+
+(map! :leader
+      :desc "stop"
+      "m X" 'emms-stop)
+
+(map! :leader
+      :desc "choose playlist to play"
+      "m c" 'emms-play-playlist)
+
+(map! :leader
+      :desc "switch to playlist/queue view"
+      "m p" 'emms-playlist-mode-go)
+
+(map! :leader
+      :desc "shuffle current playlist/queue"
+      "m s" 'emms-playlist-shuffle)
+
+(map! :leader
+      :desc "Show now playing music name in minibuffer"
+      "m ?" 'emms-show)
 
 ;; ============================
 ;;          PROJECTILE
@@ -232,10 +319,10 @@
   :config
   (global-lsp-bridge-mode))
 
-(setq! lsp-bridge-python-lsp-server "pylsp")
+(setq! lsp-bridge-python-lsp-server "basedpyright")
 (setq! lsp-bridge-enable-hover-diagnostic t)
 
-(setq! acm-mode-map '(keymap (7 . acm-hide) (10 . acm-complete) (9 . acm-complete)
+(setq! acm-mode-map '(keymap (7 . acm-hide) (10 . acm-complete) (9 . acm-complete) (13 . ())
                       (tab . acm-complete) (22 . acm-select-next-page)
                       (27 keymap (108 . acm-hide) (107 . acm-doc-scroll-down)
                           (106 . acm-doc-scroll-up) (100 . acm-doc-toggle) (117 . acm-filter)
@@ -298,6 +385,14 @@
       "c a"
       'lsp-bridge-code-action)
 
+(map! :desc "Scroll down LSP-BRIDGE documentation popup"
+      "C-c j"
+      'lsp-bridge-popup-documentation-scroll-down)
+
+(map! :desc "Scroll down LSP-BRIDGE documentation popup"
+      "C-c k"
+      'lsp-bridge-popup-documentation-scroll-up)
+
 ;; ============================
 ;;        DAPE DEBUGGER
 ;; ============================
@@ -320,7 +415,6 @@
 ;; ============================
 
 (setq org-directory "/mnt/6F3BD10716AFAD5C/NOTES/")
-(with-eval-after-load 'org (global-org-modern-mode))
 
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
@@ -331,32 +425,35 @@
 
 (setq org-roam-directory "/mnt/6F3BD10716AFAD5C/NOTES/")
 (use-package! org-roam-ui
-    :after org-roam ;; or :after org
-;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
-;;         a hookable mode anymore, you're advised to pick something yourself
-;;         if you don't care about startup time, use
-;;  :hook (after-init . org-roam-ui-mode)
-    :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
+  :after org-roam ;; or :after org
+  ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+  ;;         a hookable mode anymore, you're advised to pick something yourself
+  ;;         if you don't care about startup time, use
+  ;;  :hook (after-init . org-roam-ui-mode)
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
+
+(setq! org-roam-capture-templates
+       '(("d" "default" plain "%?"
+          :target (file+head "${slug}.org" "#+title: ${title}")
+          :unnarrowed t)))
 
 (defun my-org-faces ()
-    (set-face-attribute 'org-document-title nil :height 2.5)
-    (set-face-attribute 'org-document-info nil :height 2.5)
-    (set-face-attribute 'org-document-info-keyword nil :height 0.5)
-    (set-face-attribute 'org-level-1 nil :height 2.0)
-    (set-face-attribute 'org-level-2 nil :height 1.8)
-    (set-face-attribute 'org-level-3 nil :height 1.6)
-    (set-face-attribute 'org-level-4 nil :height 1.4)
-    (set-face-attribute 'org-level-5 nil :height 1.2)
-    )
+  (set-face-attribute 'org-document-title nil :height 2.5)
+  (set-face-attribute 'org-document-info nil :height 2.5)
+  (set-face-attribute 'org-document-info-keyword nil :height 0.5)
+  (set-face-attribute 'org-level-1 nil :height 2.0)
+  (set-face-attribute 'org-level-2 nil :height 1.8)
+  (set-face-attribute 'org-level-3 nil :height 1.6)
+  (set-face-attribute 'org-level-4 nil :height 1.4)
+  (set-face-attribute 'org-level-5 nil :height 1.2)
+  )
 
 (add-hook 'org-mode-hook #'my-org-faces)
-(add-hook 'org-mode-hook 'org-modern-mode)
-
-; journal
+                                        ; Journal
 
 (setq org-journal-time-prefix "* "
       org-journal-date-prefix "#+TITLE"
@@ -372,24 +469,24 @@
 (setq! deft-recursive 't)
 
 (setq deft-strip-summary-regexp "\\`\\(.+\n\\)+\n")
-    (defun cm/deft-parse-title (file contents)
-    "Parse the given FILE and CONTENTS and determine the title.
+(defun cm/deft-parse-title (file contents)
+  "Parse the given FILE and CONTENTS and determine the title.
   If `deft-use-filename-as-title' is nil, the title is taken to
   be the first non-empty line of the FILE.  Else the base name of the FILE is
   used as title."
-      (let ((begin (string-match "^#\\+[tT][iI][tT][lL][eE]: .*$" contents)))
-        (if begin
-            (string-trim (substring contents begin (match-end 0)) "#\\+[tT][iI][tT][lL][eE]: *" "[\n\t ]+")
-          (deft-base-filename file))))
+  (let ((begin (string-match "^#\\+[tT][iI][tT][lL][eE]: .*$" contents)))
+    (if begin
+        (string-trim (substring contents begin (match-end 0)) "#\\+[tT][iI][tT][lL][eE]: *" "[\n\t ]+")
+      (deft-base-filename file))))
 
-    (advice-add 'deft-parse-title :override #'cm/deft-parse-title)
+(advice-add 'deft-parse-title :override #'cm/deft-parse-title)
 
-    (setq deft-strip-summary-regexp
-          (concat "\\("
-                  "[\n\t]" ;; blank
-                  "\\|^#\\+[[:alpha:]_]+:.*$" ;; org-mode metadata
-                  "\\|^:PROPERTIES:\n\\(.+\n\\)+:END:\n"
-                  "\\)"))
+(setq deft-strip-summary-regexp
+      (concat "\\("
+              "[\n\t]" ;; blank
+              "\\|^#\\+[[:alpha:]_]+:.*$" ;; org-mode metadata
+              "\\|^:PROPERTIES:\n\\(.+\n\\)+:END:\n"
+              "\\)"))
 
 ;; ============================
 ;;       SCROLL-ON-JUMP

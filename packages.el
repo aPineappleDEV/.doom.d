@@ -20,7 +20,6 @@
 (package! beacon)
 
 (package! org-bullets)
-(package! org-modern)
 
 (package! scroll-on-jump)
 
@@ -55,6 +54,7 @@
   (package! markdown-mode)
   (package! yasnippet))
 
+(package! emms)
 
 ;; ============================
 ;;      DISABLE PACKAGES
